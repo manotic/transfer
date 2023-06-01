@@ -52,6 +52,29 @@ class Database
 }
 
 class User extends Database {
+    public function saveUser() {
+
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $password = md5($password);
+
+        $checkQuery = "SELECT * FROM ".$this->userTable." WHERE email='".$email."'";
+
+        $checkResult = $this->getData($checkQuery);
+
+        if ($checkResult == null) {
+
+            $sqlInsert = "INSERT INTO users VALUES (NULL, '".$firstname."', '".$lastname."', '".$email."', '".$password."', '1', NULL, NULL)";
+    
+            mysqli_query($this->dbConnect, $sqlInsert);
+        } else {
+            $message = '<div class="alert alert-danger rounded-0 py-1">Email in use, try using another email address</div>';
+        }
+
+        return @$message;
+    }
 
     public function login($email, $password) 
     {
@@ -72,6 +95,12 @@ class User extends Database {
             header ('Location:login.php');
 		}
 	}
+    public function getUser($session) {
+
+        $sqlQuery = "SELECT * FROM ".$this->userTable." WHERE email='".$session."'";
+
+        return $this->getData($sqlQuery);
+    }
     public function getAddress($getUrl)
     {
 
@@ -162,10 +191,10 @@ class Transfer extends Database
 
         return $message;
     }
-    public function getRegionTransfer ($region_id) {
+    public function getInRegionTransfer($region_id) {
         
-        $sqlQuery = "SELECT * FROM ".$this->transferTable." WHERE cur_region='$region_id' AND status='1'";
+        $sqlQuery = "SELECT * FROM ".$this->transferTable." WHERE cur_region='".$region_id."' AND status='1'";
 
-        mysqli_query($this->dbConnect, $sqlQuery);
+        return $this->getData($sqlQuery);;
     }
 } 

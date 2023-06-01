@@ -2,8 +2,6 @@
 
 $region = $location->getRegion();
 
-$transfer = new Transfer();
-
 if(isset($_POST['transfer'])) {
 
     $msg = $transfer->saveTransfer();

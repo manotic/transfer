@@ -4,6 +4,7 @@
     //call database method for database connection
     $user = new User();
     $location = new Location();
+    $transfer = new Transfer();
     ?>
 
 <!DOCTYPE html>
