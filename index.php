@@ -2,6 +2,7 @@
 require ('includes/header.php');
 $user->checkLogin();
 
+
 ?>
   <body>
     
@@ -30,26 +31,45 @@ $user->checkLogin();
         </button>
         <div class="collapse show" id="home-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+<?php
+if ($_SESSION['role'] == 1) {
 
+?>
             <li><a href="index.php" class="link-dark rounded">Dashboard</a></li>
             <li><a href="index.php?url=request" class="link-dark rounded">Request transfer</a></li>
-            <li><a href="index.php?url=group-members" class="link-dark rounded">Group members</a></li>
-            <li><a href="index.php?url=group-activities" class="link-dark rounded">Group activities</a></li>
+            <li><a href="index.php?url=application" class="link-dark rounded">Application status</a></li>
+  <?php           
+} else if ($_SESSION['role'] == 2) {
+?>
+
+            <li><a href="index.php" class="link-dark rounded">Dashboard</a></li>
+            <li><a href="index.php?url=in_region" class="link-dark rounded">In region transfers</a></li>
+            <li><a href="index.php?url=out_region" class="link-dark rounded">Out region transfers</a></li>
+            <!-- <li><a href="index.php?url=application" class="link-dark rounded">Application status</a></li> -->
+<?php
+} else {
+  ?>
+            <li><a href="index.php" class="link-dark rounded">Dashboard</a></li>
+            <li><a href="index.php?url=in_district" class="link-dark rounded">In district transfers</a></li>
+            <li><a href="index.php?url=out_district" class="link-dark rounded">Out district transfers</a></li>
+  <?php
+}
+?>
           </ul>
         </div>
       </li>
-      <li class="mb-1">
+      <!-- <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
           Loan management
         </button>
         <div class="collapse" id="dashboard-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-        <!-- <li><a href="#" class="link-dark rounded">Loan application</a></li> -->
+        <li><a href="#" class="link-dark rounded">Loan application</a></li>
             <li><a href="index.php?url=request" class="link-dark rounded">Requested loan</a></li>
    
           </ul>
         </div>
-      </li>
+      </li> -->
       <li class="border-top my-3"></li>
       <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
@@ -78,6 +98,12 @@ $user->checkLogin();
       if ($includeAddress) {
         include ('includes/'.$includeAddress);
       }
+    } else {
+      ?>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+<h1 class="h2">Welcome to students tranfer system</h2>
+</div>
+      <?php
     }
 
     ?>
@@ -85,8 +111,12 @@ $user->checkLogin();
 
   </div>
 </div>
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery.js"></script>
 
-      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+      <!-- <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script> -->
+      <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"> -->
+      <!-- </script> -->
+      <!-- <script src="dashboard.js"></script> -->
   </body>
 </html>

@@ -3,7 +3,7 @@
 
     //call database method for database connection
     $user = new User();
-
+    $location = new Location();
     ?>
 
 <!DOCTYPE html>
@@ -24,6 +24,6 @@
     <!-- JavaScript and JQuery -->
     <script src="./js/jquery.js"></script>
     <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> -->
     
     <title><?php echo $systemName; ?></title>
-</head>
