@@ -20,7 +20,7 @@ $user->checkLogin();
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" style="" class="col-md-3 col-lg-2 d-md-block bg- sidebar collapse">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg- sidebar collapse">
       <div class="position-sticky pt-3">
 
 
