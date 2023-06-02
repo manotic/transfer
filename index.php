@@ -43,15 +43,15 @@ if ($_SESSION['role'] == 1) {
 ?>
 
             <li><a href="index.php" class="link-dark rounded">Dashboard</a></li>
-            <li><a href="index.php?url=in_region" class="link-dark rounded">In region transfers</a></li>
-            <li><a href="index.php?url=out_region" class="link-dark rounded">Out region transfers</a></li>
+            <li><a href="index.php?url=region-transfers" class="link-dark rounded">In region transfers</a></li>
+            <!-- <li><a href="index.php?url=out_region" class="link-dark rounded">Out region transfers</a></li> -->
             <!-- <li><a href="index.php?url=application" class="link-dark rounded">Application status</a></li> -->
 <?php
 } else {
   ?>
             <li><a href="index.php" class="link-dark rounded">Dashboard</a></li>
-            <li><a href="index.php?url=in_district" class="link-dark rounded">In district transfers</a></li>
-            <li><a href="index.php?url=out_district" class="link-dark rounded">Out district transfers</a></li>
+            <li><a href="index.php?url=district-transfers" class="link-dark rounded">View transfers</a></li>
+            <!-- <li><a href="index.php?url=out_district" class="link-dark rounded">Out district transfers</a></li> -->
   <?php
 }
 ?>

@@ -1,6 +1,6 @@
 <?php 
 
-$region = $location->getRegion();
+$region = $location->s();
 
 if(isset($_POST['transfer'])) {
 

@@ -109,15 +109,15 @@ class User extends Database {
             case 'request':
                 $getUrl = 'request-transfer.php';
                 break;
-            case 'in_region':
-                $getUrl = 'in-region-transfers.php';
+            case 'region-transfers':
+                $getUrl = 'region-transfers.php';
                 break;
-            // case 'group-activities':
-            //     $getUrl = 'add-group-activities.php';
-            //     break;
-            // case 'request':
-            //     $getUrl = 'loan-request.php';
-            //     break;
+            case 'view_transfer':
+                $getUrl = 'view-transfer.php';
+                break;
+            case 'district-transfers':
+                $getUrl = 'district-transfers.php';
+                break;
             // case 'member':
             //     $getUrl = 'member-dash.php';
             //     break;
@@ -139,19 +139,33 @@ class User extends Database {
 class  Location extends Database
 {
     
-    public function getRegion()
+    public function getRegions()
     {
 
         $sqlQuery = "SELECT * FROM ".$this->regionTable;
 
         return $this->getData($sqlQuery);
     }
-    public function getDistrict($region_id)
+    public function getRegion($region_id)
+    {
+
+        $sqlQuery = "SELECT * FROM ".$this->regionTable." WHERE region_id='".$region_id."'";
+
+        return $this->getData($sqlQuery);
+    }
+    public function getDistricts($region_id)
     {
         
         $query = "SELECT * FROM ".$this->districtTable." WHERE region_id = ".$region_id." ORDER BY district ASC";
 
         return $this->getData($query);
+    }
+    public function getDistrict($district_id)
+    {
+
+        $sqlQuery = "SELECT * FROM ".$this->districtTable." WHERE district_id='".$district_id."'";
+
+        return $this->getData($sqlQuery);
     }
 }
 class Transfer extends Database
@@ -183,7 +197,7 @@ class Transfer extends Database
         }
         $sqlInsert = "INSERT INTO ".$this->transferTable." VALUES 
         (NULL, '".$firstname."', '".$lastname."', '".$student_class."', '".$cur_school."', '".$cur_region."', '".$cur_district."',
-        '".$tran_school."', '".$tran_region."', '".$tran_district."', '".$result[0]['id']."', '".$status."' , NULL )";
+        '".$tran_school."', '".$tran_region."', '".$tran_district."', '".$result[0]['id']."', '".$status."' , 1 )";
 
         mysqli_query($this->dbConnect, $sqlInsert);
         
@@ -191,10 +205,24 @@ class Transfer extends Database
 
         return $message;
     }
-    public function getInRegionTransfer($region_id) {
+    public function getInRegionTransfer($region_id)
+    {
         
         $sqlQuery = "SELECT * FROM ".$this->transferTable." WHERE cur_region='".$region_id."' AND status='1'";
 
-        return $this->getData($sqlQuery);;
+        return $this->getData($sqlQuery);
+    }
+    public function getTransfer($transfer_id)
+    {
+
+        $sqlQuery = "SELECT * FROM  ".$this->transferTable." WHERE transfer_id='".$transfer_id."'";
+    }
+    public function getDistrictTranfers($district_id)
+    {
+        
+        $sqlQuery = "SELECT * FROM ".$this->transferTable." WHERE cur_district=".$district_id." AND (tran_level='1' OR tran_level='4')
+        OR tran_district=".$district_id." AND (tran_level='1' OR tran_level='4') ORDER BY transfer_id DESC";
+
+        return $this->getData($sqlQuery);
     }
 } 
