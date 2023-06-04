@@ -43,9 +43,16 @@ if ($_SESSION['role'] == 1) {
 ?>
 
             <li><a href="index.php" class="link-dark rounded">Dashboard</a></li>
-            <li><a href="index.php?url=region-transfers" class="link-dark rounded">In region transfers</a></li>
+            <li><a href="index.php?url=region-transfers" class="link-dark rounded">View transfers</a></li>
             <!-- <li><a href="index.php?url=out_region" class="link-dark rounded">Out region transfers</a></li> -->
             <!-- <li><a href="index.php?url=application" class="link-dark rounded">Application status</a></li> -->
+<?php
+} elseif ($_SESSION['email'] == 'admin@admin.com') {
+?>
+            <li><a href="index.php" class="link-dark rounded">Dashboard</a></li>
+            <li><a href="index.php?url=region" class="link-dark rounded">Add region</a></li>
+            <li><a href="index.php?url=district" class="link-dark rounded">Add district</a></li>
+            <li><a href="index.php?url=add-user" class="link-dark rounded">Add district/region officers</a></li>
 <?php
 } else {
   ?>
@@ -70,19 +77,20 @@ if ($_SESSION['role'] == 1) {
           </ul>
         </div>
       </li> -->
-      <li class="border-top my-3"></li>
+      
+      <!-- <li class="border-top my-3"></li>
       <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
           Account
         </button>
         <div class="collapse" id="account-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <!-- <li><a href="#" class="link-dark rounded">Profile</a></li> -->
+            <li><a href="#" class="link-dark rounded">Profile</a></li>
             <li><a href="index.php?url=member-settings" class="link-dark rounded">Settings</a></li>
             <li><a href="action.php?action=logout" class="link-dark rounded">Sign out</a></li>
           </ul>
         </div>
-      </li>
+      </li> -->
     </ul>
 
       </div>

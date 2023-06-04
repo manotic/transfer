@@ -75,7 +75,27 @@ class User extends Database {
 
         return @$message;
     }
+    public function addUser() {
+        
+        
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $password = md5($password);
+        $region_id = $_POST['region'];
+        $district_id = $_POST['district'];
 
+        if (isset($region_id) && empty($district_id)) {
+        
+            $sqlInsert = "INSERT INTO users VALUES (NULL, '".$firstname."', '".$lastname."', '".$email."', '".$password."', 2, '".$region_id."', NULL)";
+        } else {
+            
+            $sqlInsert = "INSERT INTO users VALUES (NULL, '".$firstname."', '".$lastname."', '".$email."', '".$password."', 2, '".$region_id."', NULL)";
+        }
+
+		mysqli_query($this->dbConnect, $sqlInsert);
+    }
     public function login($email, $password) 
     {
 
@@ -95,9 +115,27 @@ class User extends Database {
             header ('Location:login.php');
 		}
 	}
-    public function getUser($session) {
+    public function getUser($email) {
 
-        $sqlQuery = "SELECT * FROM ".$this->userTable." WHERE email='".$session."'";
+        $sqlQuery = "SELECT * FROM ".$this->userTable." WHERE email='".$email."'";
+
+        return $this->getData($sqlQuery);
+    }
+    public function getAllUsers() {
+
+        $sqlQuery = "SELECT * FROM ".$this->userTable." WHERE region_id IS NOT NULL OR district_id IS NOT NULL ORDER BY firstname ASC";
+
+        return $this->getData($sqlQuery);
+    }
+    public function getRegionAdmin($region_id) {
+
+        $sqlQuery = "SELECT * FROM ".$this->userTable." WHERE region_id='".$region_id."'";
+
+        return $this->getData($sqlQuery);
+    }
+    public function getDistrictAdmin($district_id) {
+
+        $sqlQuery = "SELECT * FROM ".$this->userTable." WHERE district_id='".$district_id."'";
 
         return $this->getData($sqlQuery);
     }
@@ -118,15 +156,18 @@ class User extends Database {
             case 'district-transfers':
                 $getUrl = 'district-transfers.php';
                 break;
-            // case 'member':
-            //     $getUrl = 'member-dash.php';
-            //     break;
-            // case 'admin':
-            //     $getUrl = 'admin-dash.php';
-            //     break;
-            // case 'group-details':
-            //     $getUrl = 'group-details.php';
-            //     break;
+            case 'application':
+                 $getUrl = 'application-status.php';
+                 break;
+            case 'district':
+                $getUrl = 'add-district.php';
+                break;
+            case 'region':
+                $getUrl = 'add-region.php';
+                break;
+            case 'add-user':
+                $getUrl = 'add-users.php';
+                break;
             default:
                 $getUrl = null;
                 break;
@@ -142,7 +183,7 @@ class  Location extends Database
     public function getRegions()
     {
 
-        $sqlQuery = "SELECT * FROM ".$this->regionTable;
+        $sqlQuery = "SELECT * FROM ".$this->regionTable." ORDER BY region ASC";
 
         return $this->getData($sqlQuery);
     }
@@ -160,12 +201,38 @@ class  Location extends Database
 
         return $this->getData($query);
     }
+    public function getAllDistrict() {
+
+        $sqlQuery = "SELECT * FROM ".$this->districtTable." ORDER BY district ASC";
+
+        return $this->getData($sqlQuery);
+    }
     public function getDistrict($district_id)
     {
 
         $sqlQuery = "SELECT * FROM ".$this->districtTable." WHERE district_id='".$district_id."'";
 
         return $this->getData($sqlQuery);
+    }
+    public function addRegion() {
+
+        $region = $_POST['region'];
+        $region = ucfirst(strtolower($region));
+
+        $sqlInsert = "INSERT INTO ".$this->regionTable." VALUES (NULL, '".$region."' )";
+
+        mysqli_query($this->dbConnect, $sqlInsert);
+    }
+    public function addDistrict () {
+
+        $region_id = $_POST['region_id'];
+        $district = $_POST['district'];
+        $district = ucfirst(strtolower($district));
+
+
+        $sqlInsert = "INSERT INTO ".$this->districtTable." VALUES (NULL, '".$region_id."', '".$district."' )";
+
+        mysqli_query($this->dbConnect, $sqlInsert);
     }
 }
 class Transfer extends Database
@@ -208,7 +275,14 @@ class Transfer extends Database
     public function getInRegionTransfer($region_id)
     {
         
-        $sqlQuery = "SELECT * FROM ".$this->transferTable." WHERE cur_region='".$region_id."' AND status='1'";
+        $sqlQuery = "SELECT * FROM ".$this->transferTable." WHERE cur_region='".$region_id."'";
+
+        return $this->getData($sqlQuery);
+    }
+    public function getInRegionTransfers($region_id) {
+
+        $sqlQuery = "SELECT * FROM ".$this->transferTable." WHERE cur_region='".$region_id."' 
+        OR tran_region=".$region_id." ORDER BY transfer_id DESC";
 
         return $this->getData($sqlQuery);
     }
@@ -216,13 +290,57 @@ class Transfer extends Database
     {
 
         $sqlQuery = "SELECT * FROM  ".$this->transferTable." WHERE transfer_id='".$transfer_id."'";
+
+        return $this->getData($sqlQuery);
     }
     public function getDistrictTranfers($district_id)
     {
         
-        $sqlQuery = "SELECT * FROM ".$this->transferTable." WHERE cur_district=".$district_id." AND (tran_level='1' OR tran_level='4')
-        OR tran_district=".$district_id." AND (tran_level='1' OR tran_level='4') ORDER BY transfer_id DESC";
+        $sqlQuery = "SELECT * FROM ".$this->transferTable." WHERE cur_district=".$district_id." 
+        OR tran_district=".$district_id." ORDER BY transfer_id DESC";
 
         return $this->getData($sqlQuery);
+    }
+    public function getParentsTransfer($parent_id) {
+
+        $sqlQuery = "SELECT * FROM ".$this->transferTable." WHERE parent_id=".$parent_id."";
+        
+        return $this->getData($sqlQuery);
+    }
+    public function updateTransfer($transfer_id, $role)
+    {
+        
+        $description = $_POST['description'];
+        $choice = $_POST['choice'];
+        $tran_level = $_POST['tran_level'];
+        $status = $_POST['status'];
+
+        if ($choice == 'reject') {
+
+            $tran_level = 0;
+            $sqlInsert = " UPDATE transfers SET tran_level='".$tran_level."', description='".$description."', set_by='".$_SESSION['email']."'
+            WHERE transfer_id='".$transfer_id."'";
+        } elseif ($choice == 'accept' && $status == 1) {
+
+            switch ($role) {
+                case 'district':
+                    $tran_level = $tran_level + 1;
+                    break;
+                case 'region':
+                    $tran_level = $tran_level + 2;
+                    break;
+            }
+            $sqlInsert = "UPDATE transfers SET tran_level='".$tran_level."' WHERE transfer_id='".$transfer_id."'";
+        } elseif ($choice == 'accept' && $status == 2) {
+
+            $tran_level + 4;
+            $sqlInsert = "UPDATE transfers SET tran_level='".$tran_level."' WHERE transfer_id='".$transfer_id."'";
+        } elseif ($choice == 'accept' && $status == 3) {
+            
+            $tran_level = $tran_level + 1;
+            $sqlInsert = "UPDATE transfers SET tran_level='".$tran_level."' WHERE transfer_id='".$transfer_id."'";
+        }
+
+    mysqli_query($this->dbConnect, $sqlInsert);
     }
 } 

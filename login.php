@@ -11,7 +11,7 @@ if (isset($_POST['login'])) {
         if($login != NULL && sizeof($login) == 1) {
             $_SESSION['email'] = $login[0]['email'];
             $_SESSION['role'] = $login[0]['role'];
-           
+
             header("Location:index.php");
         } else {
             $loginError = "Invalid email or password!";
