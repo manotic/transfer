@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2023 at 09:12 PM
+-- Generation Time: Jun 05, 2023 at 08:08 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -108,14 +108,6 @@ CREATE TABLE `transfers` (
   `set_by` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `transfers`
---
-
-INSERT INTO `transfers` (`transfer_id`, `firstname`, `lastname`, `student_class`, `cur_school`, `cur_region`, `cur_district`, `tran_school`, `tran_region`, `tran_district`, `parent_id`, `status`, `tran_level`, `description`, `set_by`) VALUES
-(2, 'Joe', 'Doe', 'CLASS 2', 'KILIMAHEWA PRIMARY', 2, 17, 'ILALA PRIMARY', 1, 1, 1, 3, 0, 'This is not a good school', 'malinyi@email.com'),
-(3, 'ABASI', 'mussa', 'CLASS 5', 'KILIMAHEWA PRIMARY', 1, 1, 'ILALA PRIMARY', 1, 3, 7, 1, 1, '', '');
-
 -- --------------------------------------------------------
 
 --
@@ -138,15 +130,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`, `region_id`, `district_id`) VALUES
-(1, 'PAUL', 'SAMUEL', 'parent@email.com', '5f4dcc3b5aa765d61d8327deb882cf99', 1, NULL, NULL),
-(2, 'SAIMONI', 'RAPHAEL', 'morogoro@email.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2, 2, NULL),
-(3, 'ISACK', 'MAKUBE', 'dar@email.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2, 1, NULL),
-(4, 'SARAPHINA', 'LUBIGALE', 'mbeya@email.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2, 3, NULL),
-(5, 'JUMA', 'LAKIM', 'ilala@email.com', '5f4dcc3b5aa765d61d8327deb882cf99', 3, NULL, 1),
-(6, 'AMINA', 'SALEHE', 'malinyi@email.com', '5f4dcc3b5aa765d61d8327deb882cf99', 3, NULL, 17),
-(7, 'Mhsjjk', 'Hss', 'parent2@email.com', '5f4dcc3b5aa765d61d8327deb882cf99', 1, NULL, NULL),
-(8, '', '', 'admin@admin.com', '5f4dcc3b5aa765d61d8327deb882cf99', 0, NULL, NULL),
-(9, 'Respiscus', 'Salen', 'kigoma@email.com', 'd41d8cd98f00b204e9800998ecf8427e', 2, 13, NULL);
+(8, '', '', 'admin@admin.com', '5f4dcc3b5aa765d61d8327deb882cf99', 0, NULL, NULL);
 
 --
 -- Indexes for dumped tables
