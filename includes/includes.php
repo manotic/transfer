@@ -81,7 +81,7 @@ class User extends Database {
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = "password";
         $password = md5($password);
         $region_id = $_POST['region'];
         $district_id = $_POST['district'];
