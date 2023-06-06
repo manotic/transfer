@@ -264,7 +264,7 @@ class Transfer extends Database
         }
         $sqlInsert = "INSERT INTO ".$this->transferTable." VALUES 
         (NULL, '".$firstname."', '".$lastname."', '".$student_class."', '".$cur_school."', '".$cur_region."', '".$cur_district."',
-        '".$tran_school."', '".$tran_region."', '".$tran_district."', '".$result[0]['id']."', '".$status."' , 1 )";
+        '".$tran_school."', '".$tran_region."', '".$tran_district."', '".$result[0]['id']."', '".$status."' , 1, NULL, NULL )";
 
         mysqli_query($this->dbConnect, $sqlInsert);
         
