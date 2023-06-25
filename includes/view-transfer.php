@@ -31,11 +31,13 @@ if (isset($_POST['update-transfer'])) {
   <h2 class="h5">Re: STUDENT TRANFER</h2>
   <p>Please refer to the heading above as it describe about the request for student transfer. 
     The transfer and students details are as explained below</p>
-  <p><b>Students name: </b><?php echo $tran[0]['firstname'].' '.$tran[0]['lastname']; ?></p>
+  <p><b>Students name: </b><?php echo $tran[0]['firstname'].' '.$tran[0]['middlename'].' '.$tran[0]['lastname']; ?></p>
+  <p><b>Born in : </b><?php echo date('d-M-Y', strtotime($tran[0]['birthdate'])); ?></p>
   <p><b>Transfer from: </b><?php echo $tran[0]['cur_school']; ?></p>
   <p><b>Found in: </b><?php echo $cur_district[0]['district'].', '.$cur_region[0]['region']; ?></p>
   <p><b>Transfer to: </b><?php echo $tran[0]['tran_school']; ?></p>
   <p><b>Found in: </b><?php echo $tran_district[0]['district'].', '.$tran_region[0]['region']; ?></p>
+  <p><b>Attachments: </b><a href="uploads/<?php echo $tran[0]['attach'];?>" target="blank"> View attachments</a></p>
 </div>
 
 <?php 
