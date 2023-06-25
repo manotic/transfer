@@ -52,26 +52,33 @@ $(document).ready(function(){
 <h1 class="h2">Student transfer form</h2>
 </div>
 
-<div class="form">
-<form method="POST" class=" row g-3">
+<div class="form mb-5">
+<form method="POST" class=" row g-3" enctype = "multipart/form-data">
     <div class="form-group">
         <?php if (isset($msg)) { echo @$msg; } ?>
     </div>
     <!-- <input type="hidden" name="id" value="<?php echo @$group[0]['id']; ?>"> -->
-    <div class="col-md-6 mb-3">
+    <div class="col-md-4 mb-3">
         <label for="floatingInput">Students first name</label>
-        <input type="text" name="firstname" class="form-control" id="floatingInput" placeholder="JOE">
+        <input type="text" name="firstname" class="form-control" id="floatingInput">
+    </div>
+    <div class="col-md-4 mb-3">
+        <label for="floatingInput">Students middle name</label>
+        <input type="text" name="middlename" class="form-control" id="floatingInput">
+    </div>
+    <div class="col-md-4">
+        <label for="floatingInput">Students last name</label>
+        <input type="text" name="lastname" class="form-control" id="floatingInput">
     </div>
     <div class="col-md-6">
-        <label for="floatingInput">Students last name</label>
-        <input type="text" name="lastname" class="form-control" id="floatingInput" placeholder="DOE">
+        <label for="floatingInput">Students date of birth</label>
+        <input type="date" name="birthdate" class="form-control" id="floatingInput">
     </div>
     <div class="col-md-6">
         <label for="floatingInput">Students class</label>
         <select name="student_class" class="form-select form-select-md mb-3" aria-label=".form-select-md example">
             <option>Select students class level</option>
             <?php
-            
             for ($i=1; $i < 7; $i++) { 
                 
                 echo '<option value="CLASS '.$i.'">CLASS '.$i.'</option>';
@@ -99,7 +106,6 @@ $(document).ready(function(){
             } else {
                 var_dump($region);
             }
-            
             ?>
         </select>
     </div>
@@ -138,7 +144,9 @@ $(document).ready(function(){
         <select name="tran_district" id="tran_district" class="form-select form-select-md mb-3" aria-label=".form-select-md example">
             <!-- <option>Transfer school district</option> -->
         </select>
-    </div>
+    </div><div class="mb-3">
+          <input type="file" name="upload" class="form-control form-control-md" aria-label="Small file input example">
+        </div>
     <button class="w-100 btn btn-lg btn-success" type="submit" name="transfer">Apply Transfer</button>
 </form>
 </div>

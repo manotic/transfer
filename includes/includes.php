@@ -91,7 +91,7 @@ class User extends Database {
             $sqlInsert = "INSERT INTO users VALUES (NULL, '".$firstname."', '".$lastname."', '".$email."', '".$password."', 2, '".$region_id."', NULL)";
         } else {
             
-            $sqlInsert = "INSERT INTO users VALUES (NULL, '".$firstname."', '".$lastname."', '".$email."', '".$password."', 2, '".$region_id."', NULL)";
+            $sqlInsert = "INSERT INTO users VALUES (NULL, '".$firstname."', '".$lastname."', '".$email."', '".$password."', 2, NULL, '".$district_id."')";
         }
 
 		mysqli_query($this->dbConnect, $sqlInsert);
@@ -240,7 +240,9 @@ class Transfer extends Database
     public function saveTransfer() {
 
         $firstname = $_POST['firstname'];
+        $middlename = $_POST['middlename'];
         $lastname = $_POST['lastname'];
+        $birthdate = date('Y-m-d', strtotime($_POST['birthdate']));
         $student_class = $_POST['student_class'];
         $cur_school = $_POST['cur_school'];
         $cur_region = $_POST['cur_region'];
@@ -248,6 +250,20 @@ class Transfer extends Database
         $tran_school = $_POST['tran_school'];
         $tran_region = $_POST['tran_region'];
         $tran_district = $_POST['tran_district'];
+
+        //upload files
+        if(isset($_FILES['upload'])){
+            $file_name = $_FILES['upload']['name'];
+            $file_ext = explode('.',$_FILES['upload']['name']);
+            $file_ext = end($file_ext);
+            $file_ext = strtolower($file_ext);
+            $file_name = pathinfo($_FILES['upload']['name'], PATHINFO_FILENAME).uniqid().".".$file_ext;
+            $file_tmp =$_FILES['upload']['tmp_name'];
+         
+            
+            move_uploaded_file($file_tmp,"uploads/".$file_name);
+           
+        }
 
         //GET PARENT ID
         $parQuery = "SELECT * FROM ".$this->userTable." WHERE email='".$_SESSION['email']."'";
@@ -263,14 +279,18 @@ class Transfer extends Database
             $status = 3;
         }
         $sqlInsert = "INSERT INTO ".$this->transferTable." VALUES 
-        (NULL, '".$firstname."', '".$lastname."', '".$student_class."', '".$cur_school."', '".$cur_region."', '".$cur_district."',
-        '".$tran_school."', '".$tran_region."', '".$tran_district."', '".$result[0]['id']."', '".$status."' , 1, NULL, NULL )";
+        (NULL, '".$firstname."', '".$middlename."', '".$lastname."', '".$birthdate."', '".$student_class."', '".$cur_school."',
+        '".$cur_region."', '".$cur_district."', '".$tran_school."', '".$tran_region."', '".$tran_district."',  '".$file_name."', '".$result[0]['id']."',
+        '".$status."' , 1, NULL, NULL )";
 
         mysqli_query($this->dbConnect, $sqlInsert);
         
         $message = '<div class="alert alert-success rounded-0 py-1">Application sent</div>';
 
         return $message;
+    }
+    public function uploads() {
+
     }
     public function getInRegionTransfer($region_id)
     {

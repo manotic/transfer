@@ -5,7 +5,7 @@ $userDetail = $user->getUser($_SESSION['email']);
 $trans = $transfer->getInRegionTransfers($userDetail[0]['region_id']);
 ?>
 
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
                 <label for="floatingInput">First name</label>
                 <input type="firstname" name="firstname" class="form-control" id="floatingInput" value="<?php echo @$_POST['firstname'] ?>" placeholder="John " required>
             </div>
@@ -13,7 +13,7 @@ $trans = $transfer->getInRegionTransfers($userDetail[0]['region_id']);
             <div class="col-md-6">
                 <label for="floatingInput">Last name</label>
                 <input type="lastname" name="lastname" class="form-control" id="floatingInput" value="<?php echo @$_POST['lastname'] ?>" placeholder="Doe" required>
-            </div>
+            </div> -->
             
 <div class="bd-example mt-5">
 <table class="table table-striped">
