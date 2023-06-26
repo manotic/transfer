@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2023 at 08:08 AM
+-- Generation Time: Jun 26, 2023 at 11:49 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -93,7 +93,9 @@ INSERT INTO `regions` (`region_id`, `region`) VALUES
 CREATE TABLE `transfers` (
   `transfer_id` bigint(5) NOT NULL,
   `firstname` varchar(100) NOT NULL,
+  `middlename` varchar(100) NOT NULL,
   `lastname` varchar(100) NOT NULL,
+  `birthdate` date NOT NULL,
   `student_class` varchar(50) NOT NULL,
   `cur_school` varchar(100) NOT NULL,
   `cur_region` bigint(5) NOT NULL,
@@ -101,6 +103,7 @@ CREATE TABLE `transfers` (
   `tran_school` varchar(100) NOT NULL,
   `tran_region` bigint(5) NOT NULL,
   `tran_district` bigint(5) NOT NULL,
+  `attach` varchar(50) NOT NULL,
   `parent_id` bigint(5) NOT NULL,
   `status` bigint(5) NOT NULL,
   `tran_level` bigint(5) NOT NULL,
@@ -182,13 +185,13 @@ ALTER TABLE `regions`
 -- AUTO_INCREMENT for table `transfers`
 --
 ALTER TABLE `transfers`
-  MODIFY `transfer_id` bigint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `transfer_id` bigint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
