@@ -91,7 +91,7 @@ class User extends Database {
             $sqlInsert = "INSERT INTO users VALUES (NULL, '".$firstname."', '".$lastname."', '".$email."', '".$password."', 2, '".$region_id."', NULL)";
         } else {
             
-            $sqlInsert = "INSERT INTO users VALUES (NULL, '".$firstname."', '".$lastname."', '".$email."', '".$password."', 2, NULL, '".$district_id."')";
+            $sqlInsert = "INSERT INTO users VALUES (NULL, '".$firstname."', '".$lastname."', '".$email."', '".$password."', 3, NULL, '".$district_id."')";
         }
 
 		mysqli_query($this->dbConnect, $sqlInsert);
@@ -167,6 +167,9 @@ class User extends Database {
                 break;
             case 'add-user':
                 $getUrl = 'add-users.php';
+                break;
+            case 'transfer_status':
+                $getUrl = 'transfer-status.php';
                 break;
             default:
                 $getUrl = null;
@@ -269,7 +272,7 @@ class Transfer extends Database
         $parQuery = "SELECT * FROM ".$this->userTable." WHERE email='".$_SESSION['email']."'";
         $result = $this->getData($parQuery);
 
-        if ($cur_region == $tran_region) {
+        if ($cur_region == $tran_region && $cur_district != $tran_district) {
 
             $status = 1;
         } else if($cur_district == $tran_district) {
@@ -353,7 +356,7 @@ class Transfer extends Database
             $sqlInsert = "UPDATE transfers SET tran_level='".$tran_level."' WHERE transfer_id='".$transfer_id."'";
         } elseif ($choice == 'accept' && $status == 2) {
 
-            $tran_level + 4;
+            $tran_level = $tran_level + 4;
             $sqlInsert = "UPDATE transfers SET tran_level='".$tran_level."' WHERE transfer_id='".$transfer_id."'";
         } elseif ($choice == 'accept' && $status == 3) {
             

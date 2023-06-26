@@ -37,7 +37,7 @@ if (isset($_POST['update-transfer'])) {
   <p><b>Found in: </b><?php echo $cur_district[0]['district'].', '.$cur_region[0]['region']; ?></p>
   <p><b>Transfer to: </b><?php echo $tran[0]['tran_school']; ?></p>
   <p><b>Found in: </b><?php echo $tran_district[0]['district'].', '.$tran_region[0]['region']; ?></p>
-  <p><b>Attachments: </b><a href="uploads/<?php echo $tran[0]['attach'];?>" target="blank"> View attachments</a></p>
+  <p><b>Attachments: </b><a href="uploads/<?php echo $tran[0]['attach'];?>" target="blank">View attachments</a></p>
 </div>
 
 <?php 

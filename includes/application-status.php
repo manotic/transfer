@@ -36,9 +36,9 @@ if (@$trans != NULL) {
             echo '<td>Transfer accepted!</td>';
         } elseif ($trans[0]['tran_level'] == 0) {
 
-            echo '<td>Transfer rejected <a class="badge squire-pill bg-info" href="index.php?url=application&trans_id='.$trans[$i]['transfer_id'].'">View details</a></td>';
+            echo '<td>Transfer rejected <a class="badge squire-pill bg-info" href="index.php?url=transfer_status&trans_id='.$trans[$i]['transfer_id'].'">View details</a></td>';
         } else {
-            echo '<td>Transfer on progress</td>';
+            echo '<td>Transfer on progress <a class="badge squire-pill bg-info" href="index.php?url=transfer_status&trans_id='.$trans[$i]['transfer_id'].'">View deatils</td>';
         }
         echo '</tr>';
 
@@ -54,7 +54,7 @@ if (@$trans != NULL) {
 </table>
 </div>
 
-<div class="container mt-5">
+<!-- <div class="container mt-5">
 <?php 
 if (isset($_GET['trans_id'])) {
     
@@ -80,4 +80,4 @@ if (isset($_GET['trans_id'])) {
     echo '<p><b>Description: </b>'.$tran[0]['description'].' </p>';
 }
 ?>
-</div>
+</div> -->
