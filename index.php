@@ -65,32 +65,6 @@ if ($_SESSION['role'] == 1) {
           </ul>
         </div>
       </li>
-      <!-- <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-          Loan management
-        </button>
-        <div class="collapse" id="dashboard-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-        <li><a href="#" class="link-dark rounded">Loan application</a></li>
-            <li><a href="index.php?url=request" class="link-dark rounded">Requested loan</a></li>
-   
-          </ul>
-        </div>
-      </li> -->
-      
-      <!-- <li class="border-top my-3"></li>
-      <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-          Account
-        </button>
-        <div class="collapse" id="account-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark rounded">Profile</a></li>
-            <li><a href="index.php?url=member-settings" class="link-dark rounded">Settings</a></li>
-            <li><a href="action.php?action=logout" class="link-dark rounded">Sign out</a></li>
-          </ul>
-        </div>
-      </li> -->
     </ul>
 
       </div>
