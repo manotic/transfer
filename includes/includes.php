@@ -292,9 +292,6 @@ class Transfer extends Database
 
         return $message;
     }
-    public function uploads() {
-
-    }
     public function getInRegionTransfer($region_id)
     {
         
