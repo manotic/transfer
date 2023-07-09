@@ -271,11 +271,11 @@ class Transfer extends Database
             $file_ext = explode('.', $_FILES['upload']['name']);
             $file_ext = end($file_ext);
             $file_ext = strtolower($file_ext);
-            $file_name = pathinfo($_FILES['upload']['name'], PATHINFO_FILENAME) . uniqid() . "." . $file_ext;
-            $file_tmp = $_FILES['upload']['tmp_name'];
+            $file_name = pathinfo($_FILES['upload']['name'], PATHINFO_FILENAME)."." . $file_ext;
+            // $file_tmp = $_FILES['upload']['tmp_name'];
 
 
-            move_uploaded_file($file_tmp, "uploads/" . $file_name);
+            // move_uploaded_file($file_tmp, "uploads/" . $file_name);
         }
 
         //GET PARENT ID
